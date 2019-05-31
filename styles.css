@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css?family=Cabin:400,500,600,700');
+@import url('https://fonts.googleapis.com/css?family=Muli:400,600');
+:root {
+    --primary-font-family: 'Muli', sans-serif;
+    --secondary-font-family: 'Cabin', sans-serif;
+}
+html {
+    font-size: 62.5%;
+}
+
+body {
+    margin: 50px;
+    font-family: var(--primary-font-family);
+    font-size: 1.6rem;
+}
+
+main,
+footer {
+    max-width: 1024px;
+    margin: 0 auto;
+}
