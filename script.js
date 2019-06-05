@@ -5,10 +5,15 @@ const apiUrl = 'http://www.boredapi.com/api/activity?';
 const resultElem = document.querySelector('.result');
 const randomBtn = document.getElementById('randomBtn');
 const typeBtns = document.querySelectorAll('.typeBtn');
+const toggleSettingSectionBtn = document.getElementById('toggleSettingSection');
+const settingsSection = document.querySelector('.settings');
+const activityAccessibilitySlider = document.getElementById('activityAccessibility');
 
 const init = () => {
     getRandomActivity();
     randomBtn.addEventListener('click', getRandomActivity);
+    toggleSettingSectionBtn.addEventListener('click', toggleSettingSection);
+    activityAccessibilitySlider.addEventListener('change', setActivityAccessibility);
     for (let i = 0; i < typeBtns.length; i++) {
         typeBtns[i].addEventListener('click', () => {
             getRandomActivity(`type=${typeBtns[i].dataset.type}`);
@@ -39,9 +44,23 @@ const setResult = obj => {
     }
 };
 
+const setActivityAccessibility = () => {
+    console.log('sliding')
+};
+
 const setActivityLink = (activity, link) => {
     if (link.includes('http')) {
         resultElem.innerHTML = `<a href="${link}">${activity}</a>`;
+    }
+};
+
+const toggleSettingSection = () => {
+    if (settingsSection.classList.contains('-hidden')) {
+        settingsSection.classList.remove('-hidden');
+        toggleSettingSectionBtn.innerText = 'Hide';
+    } else {
+        settingsSection.classList.add('-hidden');
+        toggleSettingSectionBtn.innerText = 'Show';
     }
 };
 

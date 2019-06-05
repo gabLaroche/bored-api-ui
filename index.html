@@ -15,46 +15,60 @@
 <body>
 <main>
     <h1>Bored? find something to do</h1>
-    <div>
+    <div class="result-ctn">
         <p class="result"></p>
     </div>
     <button id="randomBtn">Random activity</button>
 
-    <h2>Settings <button>show</button></h2>
-    <div class="settings">
-        <!-- ["education", "recreational", "social", "diy", "charity", "cooking", "relaxation", "music", "busywork"] -->
-        <div>
-            <h3>Activity Type</h3>
-            <button class="typeBtn" data-type="education">Educational</button>
-            <button class="typeBtn" data-type="recreational">Recreational</button>
-            <button class="typeBtn" data-type="social">Social</button>
-            <button class="typeBtn" data-type="diy">DIY</button>
-            <button class="typeBtn" data-type="charity">Charity</button>
-            <button class="typeBtn" data-type="cooking">Cooking</button>
-            <button class="typeBtn" data-type="relaxation">Relaxation</button>
-            <button class="typeBtn" data-type="music">Music</button>
-            <button class="typeBtn" data-type="busywork">Busywork</button>
+    <section>
+        <h2>Activity Type</h2>
+        <ul class="activity-type">
+            <li><button class="typeBtn" data-type="education">Educational</button></li>
+            <li><button class="typeBtn" data-type="recreational">Recreational</button></li>
+            <li><button class="typeBtn" data-type="social">Social</button></li>
+            <li><button class="typeBtn" data-type="diy">DIY</button></li>
+            <li><button class="typeBtn" data-type="charity">Charity</button></li>
+            <li><button class="typeBtn" data-type="cooking">Cooking</button></li>
+            <li><button class="typeBtn" data-type="relaxation">Relaxation</button></li>
+            <li><button class="typeBtn" data-type="music">Music</button></li>
+            <li><button class="typeBtn" data-type="busywork">Busywork</button></li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Settings <button id="toggleSettingSection">Show</button></h2>
+        <div class="settings -hidden">
+            <div>
+                <h3>Activity Accessibility</h3>
+                <div>
+                    <label for="activityAccessibilityMin">Minimum</label>
+                    <span>Very Accessible</span>
+                    <input id="activityAccessibilityMin" type="range" min="0" max="1" step="0.1" value="0">
+                    <span>Inaccessible</span>
+                </div>
+                <div>
+                    <label for="activityAccessibilityMax">Maximum</label>
+                    <span>Very Accessible</span>
+                    <input id="activityAccessibilityMax" type="range" min="0" max="1" step="0.1" value="0">
+                    <span>Inaccessible</span>
+                </div>
+            </div>
+            <div>
+                <h3><label for="nbParticipants">Number of participants</label></h3>
+                <span>1</span>
+                <input id="nbParticipants" type="range" min="1" max="5" value="1" list="tickmarks">
+                <span>5</span>
+                <datalist id="tickmarks">
+                    <option value="1">
+                    <option value="2">
+                    <option value="3">
+                    <option value="4">
+                    <option value="5">
+                </datalist>
+            </div>
+            <button>Reset</button>
         </div>
-        <div>
-            <h3><label for="activityAccessibility">Activity Accessibility</label></h3>
-            <span>Easy</span>
-            <input id="activityAccessibility" type="range" min="0" max="1" step="0.1" value="0">
-            <span>Hard</span>
-        </div>
-        <div>
-            <h3><label for="nbParticipants">Number of participants</label></h3>
-            <span>1</span>
-            <input id="nbParticipants" type="range" min="1" max="5" value="1" list="tickmarks">
-            <span>5</span>
-            <datalist id="tickmarks">
-                <option value="1">
-                <option value="2">
-                <option value="3">
-                <option value="4">
-                <option value="5">
-            </datalist>
-        </div>
-    </div>
+    </section>
 </main>
 </body>
 <script type="text/javascript" src="script.js"></script>
