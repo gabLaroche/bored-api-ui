@@ -1,24 +1,34 @@
 // Documentation : https://www.boredapi.com/documentation
 // keys with a link "2095681", "3943506"
 
-const apiUrl = 'http://www.boredapi.com/api/activity?';
+let apiUrl = 'http://www.boredapi.com/api/activity?';
 const resultElem = document.querySelector('.result');
 const randomBtn = document.getElementById('randomBtn');
 const typeBtns = document.querySelectorAll('.typeBtn');
 const toggleSettingSectionBtn = document.getElementById('toggleSettingSection');
 const settingsSection = document.querySelector('.settings');
-const activityAccessibilitySlider = document.getElementById('activityAccessibility');
+const activityAccessibilitySlider = document.querySelector('.activityAccessibility');
+const nbParticipantsDropdown = document.getElementById('nbParticipants');
 
 const init = () => {
     getRandomActivity();
+    addBtnEvents();
+    addFilterEvents();
+};
+
+const addBtnEvents = () => {
     randomBtn.addEventListener('click', getRandomActivity);
     toggleSettingSectionBtn.addEventListener('click', toggleSettingSection);
-    activityAccessibilitySlider.addEventListener('change', setActivityAccessibility);
     for (let i = 0; i < typeBtns.length; i++) {
         typeBtns[i].addEventListener('click', () => {
             getRandomActivity(`type=${typeBtns[i].dataset.type}`);
         })
     }
+};
+
+const addFilterEvents = () => {
+    activityAccessibilitySlider.addEventListener('change', setActivityAccessibility);
+    nbParticipantsDropdown.addEventListener('change', setNumberOfParticipants);
 };
 
 const getRandomActivity = (param = '') => {
@@ -30,6 +40,7 @@ const getRandomActivity = (param = '') => {
         .then(obj => obj.json())
         .then(obj => {
             setResult(obj);
+            console.log('getRandomActivity', apiUrl);
             randomBtn.disabled = false;
             typeBtns.forEach(elem => {
                 elem.disabled = false;
@@ -45,7 +56,16 @@ const setResult = obj => {
 };
 
 const setActivityAccessibility = () => {
-    console.log('sliding')
+    const value = event.currentTarget.value;
+    if (apiUrl.includes('accessibility')) {
+        console.log('setActivityAccessibility', apiUrl);
+    } else {
+        apiUrl += `accessibility:${value}`
+    }
+};
+
+const setNumberOfParticipants = () => {
+    console.log('sliding');
 };
 
 const setActivityLink = (activity, link) => {

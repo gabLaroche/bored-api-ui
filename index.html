@@ -18,7 +18,7 @@
     <div class="result-ctn">
         <p class="result"></p>
     </div>
-    <button id="randomBtn">Random activity</button>
+    <button id="randomBtn">Find and Activity</button>
 
     <section>
         <h2>Activity Type</h2>
@@ -36,37 +36,30 @@
     </section>
 
     <section>
-        <h2>Settings <button id="toggleSettingSection">Show</button></h2>
-        <div class="settings -hidden">
+        <h2>Settings <button id="toggleSettingSection">Hide</button></h2>
+        <div class="settings">
             <div>
-                <h3>Activity Accessibility</h3>
+                <h3><label for="activityAccessibility">Activity Accessibility</label></h3>
                 <div>
-                    <label for="activityAccessibilityMin">Minimum</label>
                     <span>Very Accessible</span>
-                    <input id="activityAccessibilityMin" type="range" min="0" max="1" step="0.1" value="0">
-                    <span>Inaccessible</span>
-                </div>
-                <div>
-                    <label for="activityAccessibilityMax">Maximum</label>
-                    <span>Very Accessible</span>
-                    <input id="activityAccessibilityMax" type="range" min="0" max="1" step="0.1" value="0">
+                    <input class="activityAccessibility" id="activityAccessibility" type="range" min="0" max="1" step="0.1" value="0">
                     <span>Inaccessible</span>
                 </div>
             </div>
             <div>
                 <h3><label for="nbParticipants">Number of participants</label></h3>
-                <span>1</span>
-                <input id="nbParticipants" type="range" min="1" max="5" value="1" list="tickmarks">
-                <span>5</span>
-                <datalist id="tickmarks">
-                    <option value="1">
-                    <option value="2">
-                    <option value="3">
-                    <option value="4">
-                    <option value="5">
-                </datalist>
+                <div>
+                    <select id="nbParticipants">
+                        <option value="0">Any</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
             </div>
-            <button>Reset</button>
+            <button id="reset">Reset</button>
         </div>
     </section>
 </main>

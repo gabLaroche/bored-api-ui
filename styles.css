@@ -20,6 +20,35 @@ footer {
     margin: 0 auto;
 }
 
+button {
+    padding: 1rem 1.6rem;
+    background: none;
+    border: 1px solid black;
+    cursor: pointer;
+    font-size: 1.6rem;
+    transition: all 350ms ease-in-out;
+    position: relative;
+    outline: none;
+}
+
+button:disabled {
+    color: rgba(188, 188, 188, 0.5);
+    border-color: rgba(188, 188, 188, 0.5);
+}
+
+.result {
+    color: #029480;
+    font-size: 4rem;
+    font-weight: 600;
+}
+
+.activity-type {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
 .-hidden {
     display: none;
 }
