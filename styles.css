@@ -20,7 +20,7 @@ footer {
     margin: 0 auto;
 }
 
-button {
+button, input[type="reset"] {
     padding: 1rem 1.6rem;
     background: none;
     border: 1px solid black;
@@ -49,6 +49,20 @@ button:disabled {
     justify-content: space-around;
 }
 
-.-hidden {
-    display: none;
+.activity-type li, .activity-type input, .activity-type label {
+    cursor: pointer;
+}
+
+input[type="reset"] {
+    margin-top: 5rem;
+}
+
+footer {
+    margin: 3rem auto 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+footer small {
+    margin: 0 1rem;
 }

@@ -15,37 +15,27 @@
 <body>
 <main>
     <h1>Bored? find something to do</h1>
+    <p>This "app" is a bit buggy, but I had fun making it, I hope you find an activity to quench your boredom.</p>
     <div class="result-ctn">
         <p class="result"></p>
     </div>
-    <button id="randomBtn">Find and Activity</button>
+    <button id="randomBtn">Find an Activity</button>
 
     <section>
-        <h2>Activity Type</h2>
-        <ul class="activity-type">
-            <li><button class="typeBtn" data-type="education">Educational</button></li>
-            <li><button class="typeBtn" data-type="recreational">Recreational</button></li>
-            <li><button class="typeBtn" data-type="social">Social</button></li>
-            <li><button class="typeBtn" data-type="diy">DIY</button></li>
-            <li><button class="typeBtn" data-type="charity">Charity</button></li>
-            <li><button class="typeBtn" data-type="cooking">Cooking</button></li>
-            <li><button class="typeBtn" data-type="relaxation">Relaxation</button></li>
-            <li><button class="typeBtn" data-type="music">Music</button></li>
-            <li><button class="typeBtn" data-type="busywork">Busywork</button></li>
-        </ul>
-    </section>
-
-    <section>
-        <h2>Settings <button id="toggleSettingSection">Hide</button></h2>
-        <div class="settings">
-            <div>
-                <h3><label for="activityAccessibility">Activity Accessibility</label></h3>
-                <div>
-                    <span>Very Accessible</span>
-                    <input class="activityAccessibility" id="activityAccessibility" type="range" min="0" max="1" step="0.1" value="0">
-                    <span>Inaccessible</span>
-                </div>
-            </div>
+        <form>
+            <h2>Activity Type</h2>
+            <ul class="activity-type">
+                <li><input type="radio" id="any" name="typeBtn" checked /><label for="any">Any</label></li>
+                <li><input type="radio" id="education" name="typeBtn" /><label for="education">Educational</label></li>
+                <li><input type="radio" id="recreational" name="typeBtn" /><label for="recreational">Recreational</label></li>
+                <li><input type="radio" id="social" name="typeBtn" /><label for="social">Social</label></li>
+                <li><input type="radio" id="diy" name="typeBtn" /><label for="diy">DIY</label></li>
+                <li><input type="radio" id="charity" name="typeBtn" /><label for="charity">Charity</label></li>
+                <li><input type="radio" id="cooking" name="typeBtn" /><label for="cooking">Cooking</label></li>
+                <li><input type="radio" id="relaxation" name="typeBtn" /><label for="relaxation">Relaxation</label></li>
+                <li><input type="radio" id="music" name="typeBtn" /><label for="music">Music</label></li>
+                <li><input type="radio" id="busywork" name="typeBtn" /><label for="busywork">Busywork</label></li>
+            </ul>
             <div>
                 <h3><label for="nbParticipants">Number of participants</label></h3>
                 <div>
@@ -59,10 +49,14 @@
                     </select>
                 </div>
             </div>
-            <button id="reset">Reset</button>
-        </div>
+            <input type="reset" value="Reset" id="reset" />
+        </form>
     </section>
 </main>
+<footer>
+    <small>&copy; 2019 Gabriel Laroche. All Rights Reserved</small>
+    <small>API used : <a href="https://www.boredapi.com">https://www.boredapi.com</a></small>
+</footer>
 </body>
 <script type="text/javascript" src="script.js"></script>
 </html>

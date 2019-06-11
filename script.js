@@ -1,46 +1,78 @@
 // Documentation : https://www.boredapi.com/documentation
-// keys with a link "2095681", "3943506"
 
-let apiUrl = 'http://www.boredapi.com/api/activity?';
+let apiUrl = 'https://www.boredapi.com/api/activity';
+const baseApiUrl = 'https://www.boredapi.com/api/activity';
 const resultElem = document.querySelector('.result');
 const randomBtn = document.getElementById('randomBtn');
-const typeBtns = document.querySelectorAll('.typeBtn');
-const toggleSettingSectionBtn = document.getElementById('toggleSettingSection');
-const settingsSection = document.querySelector('.settings');
-const activityAccessibilitySlider = document.querySelector('.activityAccessibility');
+const typeBtns = document.querySelectorAll('[name=typeBtn]');
 const nbParticipantsDropdown = document.getElementById('nbParticipants');
+const resetBtn = document.querySelector('[type="reset"]');
 
 const init = () => {
     getRandomActivity();
-    addBtnEvents();
-    addFilterEvents();
+    addEvents();
 };
 
-const addBtnEvents = () => {
+const addEvents = () => {
     randomBtn.addEventListener('click', getRandomActivity);
-    toggleSettingSectionBtn.addEventListener('click', toggleSettingSection);
+    nbParticipantsDropdown.addEventListener('change', setNumberOfParticipants);
+    resetBtn.addEventListener('click', () => {
+        apiUrl = baseApiUrl;
+    });
     for (let i = 0; i < typeBtns.length; i++) {
-        typeBtns[i].addEventListener('click', () => {
-            getRandomActivity(`type=${typeBtns[i].dataset.type}`);
-        })
+        typeBtns[i].addEventListener('change', setActivityType);
     }
 };
 
-const addFilterEvents = () => {
-    activityAccessibilitySlider.addEventListener('change', setActivityAccessibility);
-    nbParticipantsDropdown.addEventListener('change', setNumberOfParticipants);
+const setNumberOfParticipants = () => {
+    const numParticipants = parseInt(event.currentTarget.value);
+    if (numParticipants === 0) {
+        return;
+    }
+    if (apiUrl.includes('participants')) {
+        if (apiUrl.includes('&')) {
+            apiUrl = apiUrl.replace(/participants=.*&/gi, `participants=${numParticipants}&`);
+        } else {
+            apiUrl = apiUrl.substr(0, apiUrl.lastIndexOf('?')) + `?participants=${numParticipants}`;
+        }
+    } else {
+        if (apiUrl.includes('?')) {
+            apiUrl += `&participants=${numParticipants}`
+        } else {
+            apiUrl += `?participants=${numParticipants}`
+        }
+    }
 };
 
-const getRandomActivity = (param = '') => {
+const setActivityType = () => {
+    const selectedType = event.currentTarget.id;
+    if (selectedType === 'any') {
+        return;
+    }
+    if (apiUrl.includes('type')) {
+        if (apiUrl.includes('&')) {
+            apiUrl = apiUrl.replace(/type=.*&/gi, `type=${selectedType}&`);
+        } else {
+            apiUrl = apiUrl.substr(0, apiUrl.lastIndexOf('?')) + `?type=${selectedType}`;
+        }
+    } else {
+        if (apiUrl.includes('?')) {
+            apiUrl += `&type=${selectedType}`
+        } else {
+            apiUrl += `?type=${selectedType}`
+        }
+    }
+};
+
+const getRandomActivity = () => {
     randomBtn.disabled = true;
     typeBtns.forEach(elem => {
         elem.disabled = true;
     });
-    fetch(`${apiUrl}${param}`)
+    fetch(`${apiUrl}`)
         .then(obj => obj.json())
         .then(obj => {
             setResult(obj);
-            console.log('getRandomActivity', apiUrl);
             randomBtn.disabled = false;
             typeBtns.forEach(elem => {
                 elem.disabled = false;
@@ -49,38 +81,19 @@ const getRandomActivity = (param = '') => {
 };
 
 const setResult = obj => {
-    resultElem.innerText = obj.activity;
-    if (obj.hasOwnProperty('link')) {
-        setActivityLink(obj.activity, obj.link);
-    }
-};
-
-const setActivityAccessibility = () => {
-    const value = event.currentTarget.value;
-    if (apiUrl.includes('accessibility')) {
-        console.log('setActivityAccessibility', apiUrl);
+    if (obj.activity) {
+        resultElem.innerText = obj.activity;
+        if (obj.hasOwnProperty('link')) {
+            setActivityLink(obj.activity, obj.link);
+        }
     } else {
-        apiUrl += `accessibility:${value}`
+        resultElem.innerText = 'Oops No results matched your query.';
     }
-};
-
-const setNumberOfParticipants = () => {
-    console.log('sliding');
 };
 
 const setActivityLink = (activity, link) => {
     if (link.includes('http')) {
         resultElem.innerHTML = `<a href="${link}">${activity}</a>`;
-    }
-};
-
-const toggleSettingSection = () => {
-    if (settingsSection.classList.contains('-hidden')) {
-        settingsSection.classList.remove('-hidden');
-        toggleSettingSectionBtn.innerText = 'Hide';
-    } else {
-        settingsSection.classList.add('-hidden');
-        toggleSettingSectionBtn.innerText = 'Show';
     }
 };
 
