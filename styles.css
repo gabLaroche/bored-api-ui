@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css?family=Cabin:400,500,600,700');
 @import url('https://fonts.googleapis.com/css?family=Muli:400,600');
 :root {
@@ -9,15 +10,19 @@ html {
 }
 
 body {
-    margin: 50px;
     font-family: var(--primary-font-family);
     font-size: 1.6rem;
 }
 
-main,
-footer {
-    max-width: 1024px;
+main, footer {
+    max-width: 95vw;
     margin: 0 auto;
+}
+
+@media (min-width: 1440px) {
+    main, footer {
+        max-width: 75vw;
+    }
 }
 
 button, input[type="reset"] {
@@ -46,11 +51,26 @@ button:disabled {
     list-style: none;
     padding: 0;
     display: flex;
-    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+@media (min-width: 824px) {
+    .activity-type {
+        justify-content: space-between;
+    }
 }
 
 .activity-type li, .activity-type input, .activity-type label {
     cursor: pointer;
+}
+
+.activity-type li {
+    margin: 0.3rem;
+}
+
+select {
+    border: 1px solid;
+
 }
 
 input[type="reset"] {
